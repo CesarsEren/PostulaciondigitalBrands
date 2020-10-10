@@ -1,0 +1,271 @@
+<section class="content-header">
+    <div class="container-fluid">
+        <div class="row mb-2">
+            <div class="col-sm-6">
+                <h1>{{title}}</h1>
+            </div>
+            <div class="col-sm-6">
+                <span class="breadcrumb float-sm-right">
+                    <button class="btn btn-success" data-toggle="modal" data-target="#myModal">
+                        <i class="text-white fas fa-plus"></i>
+                    </button>
+                </span>
+                <!--<ol class="breadcrumb float-sm-right">
+              <li class="breadcrumb-item"><a href="#">Home</a></li>
+              <li class="breadcrumb-item active">{{title}}</li>
+            </ol>-->
+            </div>
+        </div>
+    </div>
+</section>
+
+
+<section class="content">
+    <div class="card m-2">
+        <div class="card-body p-2 ">
+            <table class="table table-striped projects">
+                <thead>
+                    <tr>
+                        <th class="text-center">
+                            DNI/LOGIN
+                        </th>
+                        <th class="text-center">
+                            NOMBRE
+                        </th>
+                        <th class="text-center">
+                            TELÉFONO
+                        </th>
+                        <th class="text-center">
+                            GÉNERO
+                        </th>
+                        <th class="text-center">
+                            SEMANALES
+                        </th>
+                        <th class="text-center">
+                            OPCIONES
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let empleado of empleados">
+                        <td class="text-center">{{empleado.login}}</td>
+                        <td class="text-center">{{empleado.paternal}} {{empleado.maternal}},{{empleado.names}}</td>
+                        <td class="text-center">{{empleado.mobile}}</td>
+                        <td class="text-center">{{empleado.gender == 'F'?'Femenino':'Masculino'}}</td>
+                        <td class="text-center">{{empleado.weekly_hours}}</td>
+                        <td class="text-center">
+                            <a class="btn btn-info m-2" (click)="openmodalEdit(empleado)">
+                                <i class="text-white fas fa-edit"></i>
+                            </a>
+                            <a class="btn btn-danger m-2" (click)="deleteEmpleado(empleado)">
+                                <i class="text-white fas fa-trash"></i>
+                            </a>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+</section>
+
+
+
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog modal-xl" role="document">
+        <form [formGroup]="empleadoform" (ngSubmit)="registrarempleado()">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title" id="myModalLabel">Registrar Empleado</h4>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                            aria-hidden="true">&times;</span></button>
+                </div>
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <fieldset>
+                                <legend>Datos Personales</legend>
+                                <div class="form-group">
+                                    <label for="cardTitle">Nombres</label>
+                                    <!--is-invalid-->
+                                    <input type="text" class="form-control " formControlName="names"
+                                        placeholder="Ingrese Nombres">
+                                    <!--small id="cardTitlehelp" *ngIf="categoryform.controls['cardTitle'].invalid"> Campo Requerido</small-->
+                                </div>
+                                <div class="form-group">
+                                    <label for="cardSubtitle">Apellido Paterno</label>
+                                    <input type="email" class="form-control" formControlName="paternal"
+                                        placeholder="Ingrese Apellido Paterno">
+                                </div>
+                                <div class="form-group">
+                                    <label for="cardSubtitle">Apellido Materno</label>
+                                    <input type="email" class="form-control" formControlName="maternal"
+                                        placeholder="Ingrese Apellido Materno">
+                                </div>
+                                <div class="form-group">
+                                    <label for="imagem">Genero</label>
+                                    <!--<input type="text" class="form-control" formControlName="gender"
+                                        placeholder="Ingrese genero">-->
+                                    <select class="form-control" formControlName="gender">
+                                        <option value="-1" disabled>seleccione genero</option>
+                                        <option value="F">Femenino</option>
+                                        <option value="M">Masculino</option>
+                                    </select>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="imagem">Documento Nacional de Identidad</label>
+                                    <input type="text" class="form-control" formControlName="dni" maxlength="8"
+                                        placeholder="Ingrese DNI">
+                                </div>
+                                <div class="form-group">
+                                    <label for="imagem">Celular</label>
+                                    <input type="text" class="form-control" formControlName="mobile" maxlength="9"
+                                        placeholder="Ingrese Celular">
+                                </div>
+                            </fieldset>
+                        </div>
+                        <div class="col-md-6">
+                            <fieldset>
+                                <legend>Datos Empresa</legend>
+                                <div class="form-group">
+                                    <label for="imagem">Horas Semanales</label>
+                                    <input type="number" class="form-control" formControlName="weekly_hours"
+                                        placeholder="Ingrese Celular">
+                                </div>
+                                <div class="form-group">
+                                    <label for="imagem">Horas Extras</label>
+                                    <input type="number" class="form-control" formControlName="extra_hours"
+                                        placeholder="Ingrese Celular">
+                                </div>
+                                <div class="form-group">
+                                    <label for="imagem">Minutos Extra</label>
+                                    <input type="number" class="form-control" formControlName="extra_minutes"
+                                        placeholder="Ingrese Celular">
+                                </div>
+
+                            </fieldset>
+                            <fieldset>
+                                <legend>Datos Cuenta</legend>
+                                <div class="form-group">
+                                    <label for="imagem">login</label>
+                                    <input type="text" class="form-control" formControlName="login"
+                                        placeholder="Ingrese Login">
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="imagem">Contraseña</label>
+                                    <input type="password" class="form-control" formControlName="pass"
+                                        placeholder="Ingrese Contraseña">
+                                </div>
+                            </fieldset>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+                    <button [disabled]="!empleadoform.valid" type="submit" class="btn btn-primary">Guardar</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+
+
+
+<div class="modal fade" id="myModalEdit" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog modal-xl" role="document">
+        <form [formGroup]="empleadoformedit" (ngSubmit)="editarempleado()">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title" id="myModalLabel">Editar Empleado</h4>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                            aria-hidden="true">&times;</span></button>
+                </div>
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <fieldset>
+                                <legend>Datos Personales</legend>
+                                <div class="form-group">
+                                    <label for="cardTitle">Nombres</label>
+                                    <!--is-invalid-->
+                                    <input type="text" class="form-control " formControlName="names"
+                                        placeholder="Ingrese Nombres">
+                                    <!--small id="cardTitlehelp" *ngIf="categoryform.controls['cardTitle'].invalid"> Campo Requerido</small-->
+                                </div>
+                                <div class="form-group">
+                                    <label for="cardSubtitle">Apellido Paterno</label>
+                                    <input type="email" class="form-control" formControlName="paternal"
+                                        placeholder="Ingrese Apellido Paterno">
+                                </div>
+                                <div class="form-group">
+                                    <label for="cardSubtitle">Apellido Materno</label>
+                                    <input type="email" class="form-control" formControlName="maternal"
+                                        placeholder="Ingrese Apellido Materno">
+                                </div>
+                                <div class="form-group">
+                                    <label for="imagem">Genero</label>
+                                    <select class="form-control" formControlName="gender">
+                                        <option value="F" select>Femenino</option>
+                                        <option value="M">Masculino</option>
+                                    </select>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="imagem">Documento Nacional de Identidad</label>
+                                    <input type="text" class="form-control" formControlName="dni" maxlength="8"
+                                        placeholder="Ingrese DNI">
+                                </div>
+                                <div class="form-group">
+                                    <label for="imagem">Celular</label>
+                                    <input type="text" class="form-control" formControlName="mobile" maxlength="9"
+                                        placeholder="Ingrese Celular">
+                                </div>
+                            </fieldset>
+                        </div>
+                        <div class="col-md-6">
+                            <fieldset>
+                                <legend>Datos Empresa</legend>
+                                <div class="form-group">
+                                    <label for="imagem">Horas Semanales</label>
+                                    <input type="number" class="form-control" formControlName="weekly_hours"
+                                        placeholder="Ingrese Celular">
+                                </div>
+                                <div class="form-group">
+                                    <label for="imagem">Horas Extras</label>
+                                    <input type="number" class="form-control" formControlName="extra_hours"
+                                        placeholder="Ingrese Celular">
+                                </div>
+                                <div class="form-group">
+                                    <label for="imagem">Minutos Extra</label>
+                                    <input type="number" class="form-control" formControlName="extra_minutes"
+                                        placeholder="Ingrese Celular">
+                                </div>
+
+                            </fieldset>
+                            <fieldset>
+                                <legend>Datos Cuenta</legend>
+                                <div class="form-group">
+                                    <label for="imagem">login</label>
+                                    <input type="text" class="form-control" formControlName="login"
+                                        placeholder="Ingrese Login">
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="imagem">Contraseña</label>
+                                    <input type="password" class="form-control" formControlName="pass"
+                                        placeholder="Ingrese Contraseña">
+                                </div>
+                            </fieldset>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+                    <button [disabled]="!empleadoformedit.valid" type="submit" class="btn btn-primary">Guardar</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>

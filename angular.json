@@ -1,6 +1,6 @@
 {
   "$schema": "./node_modules/@angular/cli/lib/config/schema.json",
-  "version": 1, 
+  "version": 1,
   "newProjectRoot": "projects",
   "projects": {
     "appdigital": {
@@ -24,9 +24,19 @@
               "src/assets"
             ],
             "styles": [
-              "src/styles.css"
+              "src/assets/plugin/fontawesome-free/css/all.min.css",
+              "src/styles.css",
+              "src/assets/css/adminlte.min.css",
+              "./node_modules/sweetalert2/dist/sweetalert2.min.css"
             ],
-            "scripts": []
+            "scripts": [
+              "src/assets/plugin/jquery/jquery.min.js",
+              "src/assets/plugin/bootstrap/js/bootstrap.bundle.min.js",
+              "src/assets/plugin/fastclick/fastclick.js",
+              "src/assets/js/adminlte.min.js",
+              "./node_modules/sweetalert2/dist/sweetalert2.min.js"
+            ],
+            "es5BrowserSupport": true
           },
           "configurations": {
             "production": {
@@ -119,6 +129,10 @@
           }
         }
       }
-    }},
-  "defaultProject": "appdigital"
+    }
+  },
+  "defaultProject": "appdigital",
+  "cli": {
+    "analytics": "26120fc0-c87b-4833-9855-db87f8c72103"
+  }
 }
