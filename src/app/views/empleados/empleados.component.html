@@ -25,6 +25,13 @@
         <div class="card-header">
             <h3 class="card-title">Empleados</h3>
             <div class="card-tools">
+                <span class="mr-1">Nro : </span>
+                <select [(ngModel)]="size" (click)="changesize()">
+                    <option value="5">5</option>
+                    <option value="10">10</option>
+                    <option value="20">20</option>
+                </select>
+
                 <span class="mr-1">Género : </span>
                 <select [(ngModel)]="gender" (click)="changeGender()">
                     <option value="-1">Ambos</option>
@@ -78,14 +85,14 @@
                 </tbody>
                 <tfoot>
                     <tr>
-                        <td><i class="fas fa-angle-double-left fa-2x"></i></td>
+                        <td><i class="fas fa-angle-double-left fa-2x" (click)="setpage(page-1)"></i></td>
                         <td colspan="2">
                             <span *ngFor="let p of totalPages;" (click)="setpage(p)">
                                 <a style="cursor: pointer;"
                                     [ngClass]="{'text-primary': p === page }">{{ p}}&nbsp;&nbsp;&nbsp;</a>
                             </span>
                         </td>
-                        <td><i class="fas fa-angle-double-right fa-2x"></i></td>
+                        <td><i class="fas fa-angle-double-right fa-2x" (click)="setpage(page+1)"></i></td>
                     </tr>
                 </tfoot>
             </table>

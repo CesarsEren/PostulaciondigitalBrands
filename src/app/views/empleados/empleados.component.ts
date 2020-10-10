@@ -20,7 +20,7 @@ export class EmpleadosComponent implements OnInit {
   }
   response: any;
   currentPage = 0;
-  size: number = 4;
+  size: number = 5;
   page: number = 1;
   gender: any = "-1";
   totalPages: number[] = [];
@@ -28,6 +28,16 @@ export class EmpleadosComponent implements OnInit {
     this.totalPages.push(this.contador);
     this.LeerEmpleados();
   }
+  changesize() {
+    //this.page = page;
+    //console.log(this.page);
+    this.contador = 1;
+    this.totalPages = [];
+    this.totalPages.push(this.contador);
+
+    this.LeerEmpleados();
+  }
+
   changeGender() {
     //this.page = page;
     //console.log(this.page);
