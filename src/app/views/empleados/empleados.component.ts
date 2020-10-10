@@ -28,6 +28,15 @@ export class EmpleadosComponent implements OnInit {
     this.totalPages.push(this.contador);
     this.LeerEmpleados();
   }
+  changeGender() {
+    //this.page = page;
+    //console.log(this.page);
+    this.contador = 1;
+    this.totalPages = [];
+    this.totalPages.push(this.contador);
+
+    this.LeerEmpleados();
+  }
   setpage(page) {
     this.page = page;
     console.log(this.page);
