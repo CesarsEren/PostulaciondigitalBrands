@@ -23,7 +23,7 @@ export class EmpleadosComponent implements OnInit {
   size: number = 20;
   page: number = 1;
   gender: any = "-1";
-  totalpage: number;
+  totalPages = [1, 2];
   ngOnInit(): void {
     this.LeerEmpleados();
   }
@@ -61,7 +61,8 @@ export class EmpleadosComponent implements OnInit {
       .GetEmpleados(this.size, this.page, this.gender)
       .subscribe((data) => {
         if (!data.error) {
-          //this.totalpage = data.counter / this.size;
+          //this.totalPages += data.counter/this.size;
+          //console.log(this.totalPages);
           this.empleados = data.content;
         } else {
           alert(data.message);
@@ -72,10 +73,10 @@ export class EmpleadosComponent implements OnInit {
     this.service.DeleteEmpleado(empleado).subscribe(
       (res) => {
         if (!res.error) {
-          alert(res.message);
+          Swal.fire("Empleado", res.message, "success");
           this.LeerEmpleados();
         } else {
-          alert(res.message);
+          Swal.fire("Oops", res.message, "error");
         }
       },
       (err) => console.log(err)
