@@ -20,11 +20,20 @@ export class EmpleadosComponent implements OnInit {
   }
   response: any;
   currentPage = 0;
-  size: number = 20;
+  size: number = 4;
   page: number = 1;
   gender: any = "-1";
-  totalPages = [1, 2];
+  totalPages: number[] = [];
   ngOnInit(): void {
+    this.totalPages.push(this.contador);
+    this.LeerEmpleados();
+  }
+  setpage(page) {
+    this.page = page;
+    console.log(this.page);
+    this.contador = 1;
+    this.totalPages = [];
+    this.totalPages.push(this.contador);
     this.LeerEmpleados();
   }
   IniciarFormularios() {
@@ -56,6 +65,7 @@ export class EmpleadosComponent implements OnInit {
       extra_minutes: ["", [Validators.required]],
     });
   }
+  contador: number = 1;
   LeerEmpleados() {
     this.service
       .GetEmpleados(this.size, this.page, this.gender)
@@ -63,6 +73,21 @@ export class EmpleadosComponent implements OnInit {
         if (!data.error) {
           //this.totalPages += data.counter/this.size;
           //console.log(this.totalPages);
+          /*if (data.counter%this.size >0) {
+            this.contador++;
+            this.totalPages.push(this.contador);
+          }
+          if(data.counter/this.size)
+          { 
+          }*/
+          var aux = data.counter;
+          while (aux > this.size) {
+            this.contador++;
+            //console.log(this.contador);
+            this.totalPages.push(this.contador);
+            aux = aux - this.size;
+          }
+
           this.empleados = data.content;
         } else {
           alert(data.message);

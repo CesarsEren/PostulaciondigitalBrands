@@ -67,9 +67,9 @@
                     <tr>
                         <td><i class="fas fa-angle-double-left fa-2x"></i></td>
                         <td colspan="2">
-                            <span *ngFor="let p of totalPages; let i = index">
+                            <span *ngFor="let p of totalPages;" (click)="setpage(p)">
                                 <a style="cursor: pointer;"
-                                    [ngClass]="{'text-primary': i === page }">{{ p }}&nbsp;&nbsp;&nbsp;</a>
+                                    [ngClass]="{'text-primary': p === page }">{{ p}}&nbsp;&nbsp;&nbsp;</a>
                             </span>
                         </td>
                         <td><i class="fas fa-angle-double-right fa-2x"></i></td>

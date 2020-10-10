@@ -1,4 +1,4 @@
-GET http://timetables-app.herokuapp.com/back/api/employee?action=read&size=100&page=1&gender=-1
+GET http://timetables-app.herokuapp.com/back/api/employee?action=read&size=4&page=3&gender=-1
 ###
 
 GET http://timetables-app.herokuapp.com/back/api/employee?action=read/5
